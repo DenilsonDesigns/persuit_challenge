@@ -3,8 +3,7 @@
  * @param {object} obj
  */
 function solution(obj) {
-  // Time: O(n): where n is the number of entries in `obj`
-  return Object.values(obj).map((el) => el);
+  return Object.values(obj);
 }
 
 module.exports = solution;

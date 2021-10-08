@@ -5,7 +5,7 @@
  * @param {Array<string>} pageData
  */
 function solution(pageNumber, itemsPerPage, pageData) {
-  let itemsPaginated = [];
+  const itemsPaginated = [];
 
   for (let i = 0; i < pageData.length; i += itemsPerPage) {
     itemsPaginated.push(pageData.slice(i, i + itemsPerPage));
