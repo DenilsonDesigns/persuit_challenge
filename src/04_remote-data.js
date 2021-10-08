@@ -13,7 +13,10 @@ const plaxios = axios.create({
 });
 
 async function solution() {
-  const [todos, users] = await fetchData();
+  const [users, todos] = await fetchData([
+    plaxios.get("/users"),
+    plaxios.get("/todos"),
+  ]);
   const userMap = buildMapFromArr(users, "id", "username");
   const todoMap = buildMapFromArrFilter(todos, "userId", "completed");
 
@@ -33,12 +36,10 @@ function buildCompletedTodoList(userObj, todoObj) {
   return rArr;
 }
 
-function fetchData() {
-  return Promise.all([plaxios.get("/todos"), plaxios.get("/users")]).then(
-    (res) => {
-      return [res[0].data, res[1].data];
-    }
-  );
+function fetchData(callArr) {
+  return Promise.all(callArr).then((res) => {
+    return res.map((res) => res.data);
+  });
 }
 
 function buildMapFromArr(obj, key, value) {
